@@ -1,0 +1,75 @@
+{{!-- 实现分页功能 --}}
+<script>
+    // 构造分页数组
+    function formatPag(pagData, curPage) {
+        var arr = [];
+        var total = pagData;
+        var cur = parseInt(curPage);
+
+        // 处理到上一页 < 的逻辑
+        var pre = {};
+        if (cur > 1)
+            pre.index = cur - 1;
+        if (cur == 1)
+            pre.index="#";
+        pre.text = '&lsaquo;';
+        if (cur != 1) {
+            pre.clickable = true;
+        }
+        arr.push(pre);
+        
+        // 处理到当前页前的逻辑
+        for (var i = 1; i < cur; i++) {
+            var pag = {};
+            pag.text = i;
+            pag.index = i;
+            pag.clickable = true;
+            arr.push(pag);
+        }
+
+        // 处理当前页
+        var pag = {};
+        pag.text = cur;
+        pag.index = cur;
+        pag.cur = true;
+        arr.push(pag);
+        for (var i = cur + 1; i <= total; i++) {
+            var pag = {};
+            pag.text = i;
+            pag.index = i;
+            pag.clickable = true;
+            arr.push(pag);
+        }
+
+        // 处理到下一页的逻辑
+        var next = {};
+        if (cur < total) {
+            next.index = cur + 1;
+        }
+        if (cur == total)
+            next.index="#";
+        next.text = '&rsaquo;';
+        if (cur != total) {
+            next.clickable = true;
+        }
+        arr.push(next);
+        return arr;
+    }
+</script>
+
+<div class = "pag" style = "width: 80%">
+    <ul style = "text-align: center;">
+        <li>
+            <a href = "#"><</a>
+        </li>
+        <li class = "cur">
+            <a href = "#">1</a>
+        </li>
+        <li class = "clickable">
+            <a href = "#">2</a>
+        </li>
+        <li>
+            <a href = "#">></a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,126 @@
+{{!-- 轮播图 --}}
+<div id = "myCarousel" class = "carousel slide" style = "height: 200px; width: 80%; margin-left: 50px; margin-right: 50px">
+    <!-- 轮播（Carousel）项目 -->
+    <div class = "carousel-inner" >
+        <div class = "item active">
+            <div class = "carousel-caption d-none d-md-block">
+                <h1>SoSadFun</h1>
+                <p>————from you know</p>
+                <input type = "button" value = "注册">
+            </div>
+            <img src = "images/bg.jpg" alt = "First slide" style = "width: 100%; height: 200px">
+        </div>
+        <div class = "item">
+            <div class = "carousel-caption d-none d-md-block">
+                <h1>轮播内容</h1>
+                <p>—————轮播内容作者</p>
+                <input type = "button" value = "注册">
+            </div>
+            <img src = "images/bg.jpg" alt = "First slide" style = "width: 100%; height: 200px">
+        </div>
+    </div>
+
+    <!-- 轮播（Carousel）导航 -->
+    <a class = "left carousel-control" href = "#myCarousel" role = "button" data-slide = "prev">
+        <span class = "glyphicon glyphicon-chevron-left" aria-hidden = "true"></span>
+        <span class = "sr-only">Previous</span>
+    </a>
+    <a class = "right carousel-control" href = "#myCarousel" role = "button" data-slide = "next">
+        <span class = "glyphicon glyphicon-chevron-right" aria-hidden = "true"></span>
+        <span class = "sr-only">Next</span>
+    </a>
+</div>
+
+{{!-- 编辑推荐 --}}
+<div class = "panel panel-default" style = "width: 80%; margin-left: 50px; margin-right: 50px">
+    <div class = "panel-heading" style = "text-align: left;">编辑推荐</div>
+    <ul class = "list-group">
+        <li class = "list-group-item"  style = "text-align: left;">
+            <a href = "BookDetail">《小说名字》
+                <small class = "text-muted">
+                    一句话描述小说[数据库 one_line_describe]
+                </small>
+            </a>
+        </li>
+    </ul>
+</div>
+
+{{!-- 原创小说 --}}
+<div class = "panel panel-default" style = "width: 80%; margin-left: 50px; margin-right: 50px">
+    <div class = "panel-heading" style = "text-align: left;">原创小说</div>
+    <table width = "100%" class = "table " style = "border-collapse: separate; border-spacing: 0px 0px;">
+        <tr>
+            <td style = "text-align: left; margin: 0px">
+                <a href = "BookDetail">小说名字
+                    <p class = "text-muted" style = "font-size: 12px; text-align: left; margin: 0px">
+                    一句话描述小说
+                    </p>
+                </a>
+            </td>
+            <td>
+                <p style = "text-align: right; margin: 0px">作者名字</p>
+                <p style = "font-size: 12px; text-align: right; margin: 0px">更新时间[数据库]</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{{!-- 同人衍生 --}}
+<div class = "panel panel-default" style = "width: 80%; margin-left: 50px; margin-right: 50px">
+    <div class = "panel-heading" style = "text-align: left;">同人衍生</div>
+    <table width = "100%" class = "table" style = "border-collapse: separate; border-spacing: 0px 0px;">
+        <tr>
+            <td style = "text-align: left; margin: 0px">
+                <a href = "BookDetail">小说名字
+                    <p class = "text-muted" style = "font-size: 12px; text-align: left; margin: 0px">
+                        一句话描述
+                    </p>
+                </a>
+            </td>
+            <td>
+                <p style = "text-align: right; margin: 0px">作者名字</p>
+                <p style = "font-size: 12px; text-align: right; margin: 0px">更新时间</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{{!-- 读写交流 --}}
+<div class = "panel panel-default" style = "width: 80%; margin-left: 50px; margin-right: 50px">
+    <div class = "panel-heading" style = "text-align: left;">读写交流</div>
+    <table width = "100%" class = "table" style = "border-collapse: separate; border-spacing: 0px 0px;">
+        <tr>
+            <td style = "text-align: left; margin: 0px">
+                <a href = "BookDetail">主题帖名字
+                    <p class = "text-muted" style = "font-size: 12px; text-align: left; margin: 0px">
+                        一句话描述
+                    </p>
+                </a>
+            </td>
+            <td>
+                <p style = "text-align: right; margin: 0px">发表人名字</p>
+                <p style = "font-size: 12px; text-align: right; margin: 0px">发表时间</p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function doPost(to, p) { // to:提交动作（action） p:参数  
+        var myForm = document.createElement("form");
+        myForm.method = "post";
+        myForm.action = to;
+
+        for (var i in p) {
+            var myInput = document.createElement("input");
+            myInput.setAttribute("name", i); // 为input对象设置name  
+            myInput.setAttribute("value", p[i]); // 为input对象设置value  
+            myForm.appendChild(myInput);
+        }
+        
+        document.body.appendChild(myForm);
+        console.log(myForm);
+        myForm.submit();
+        document.body.removeChild(myForm); // 提交后移除创建的form  
+    }
+</script>

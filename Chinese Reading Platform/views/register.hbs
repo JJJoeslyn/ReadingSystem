@@ -1,0 +1,50 @@
+
+<div style = "margin: 20px; padding: 40px">
+    <div class = "panel panel-default" style = "width: 380px; margin: 0 auto;">
+        <div class = "panel-heading">
+            <h3 class = "panel-title">注册</h3>
+        </div>
+        <div class = "panel-body">
+            <form id = "login-form">
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">邮箱</span>
+                    <input type = "text" style = "text-align: left;">
+                    <a href = "#" class = "btn btn-sm btn-default" style = "font-size: 10px">发送验证码</a>
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">验证码</span>
+                    <div id = "ipt" style = "display: inline">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                    </div>
+                    <span>倒计时</span>
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">密码</span>
+                    <input type = "password" style = "text-align: left;">
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">确认密码</span>
+                    <input type = "password" style = "text-align: left;" >
+                </div>
+                <a href = "#" style = "margin-top: 20px;" class = "btn btn-success">注册</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    //自动移动至下一位
+    $('#ipt input:gt(0)').attr('readOnly', 'true');
+    $('#ipt input').keyup(function() {
+        if (/^[0-9]{1}$/g.test($(this).val())) {
+            $(this).next().removeAttr('readOnly').focus();
+        }
+        else {
+            alert('请输入1位数字');
+            $(this).val('');
+        }
+    });
+</script>

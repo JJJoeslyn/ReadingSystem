@@ -1,0 +1,180 @@
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+    .pc_in {
+        position: relative;
+        float: left;
+        width: 6.7rem;
+        height: 1.12rem;
+        margin-top: 0.92rem;
+        margin-left: 0.4rem;
+    }
+
+    .pc_in span:last-child {
+        border-right: #E6E8ED solid 1px;
+    }
+     
+    .pc_in div  p {
+        position: absolute;
+        width: 7.5rem;
+        height: 1.12rem;
+        line-height: 1.12rem;
+        top: 0;
+        left: 0;
+        background: none;
+        overflow: hidden;  
+    }
+
+    .pc_in div span {
+        flex: 1;
+        height: 200%;
+        border: #E6E8ED solid 1px;
+        border-right: none;
+        margin-top: -0.56rem;
+    }
+
+    .pc_in div {
+        display: flex;
+        width: 100%;
+        height: 1.12rem;
+    }
+
+    .pc_in div p input {
+        float: left;
+        width: 120%;
+        height: 0.8rem;
+        line-height: 0.8rem;
+        margin-top: 0.2rem;
+        letter-spacing: 0.9rem;
+        background: none;
+        text-indent: 0.4rem;
+    }
+</style>
+
+<style>
+    .val-box {
+        display: inline-block;
+        height: 40px;
+        width: 216px;
+        text-align: center;
+        position: relative;
+        background: #FFFFFF;
+    }
+
+    .val-box input[type=text] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 34px;
+        width: 212px;
+        opacity: 0.9;
+        z-index: -999;
+        outline: none;
+    }
+
+    .val-box div {
+        height: 34px;
+        width: 28px;
+        border: 1px solid #DDD;
+        border-radius: 5px;
+        float: left;
+        margin: 2px 3px;
+        z-index: 5;
+        font-size: 1.5em;
+        font-family: arial;
+        font-weight: 530;
+        text-align: center;
+        line-height: 1.5em;
+        cursor: text;
+    }
+
+    .val-box .available {
+        border-color: #0081db;
+    }
+</style>
+
+<div style = "margin: 20px; padding: 40px">
+    <div class = "panel panel-default" style = "width: 380px; margin: 0 auto;">
+        <div class = "panel-heading">
+            <h3 class = "panel-title">注册</h3>
+        </div>
+        <div class = "panel-body">
+            <form id = "login-form" action = "/signupProcess" method = "post">
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">邮箱</span>
+                    <input type = "text" id = "email" name = "email" style = "text-align: left;">
+                    <a value = "验证邮箱" class = "btn btn-sm btn-default" style = "font-size: 10px"  name = "cfmemail" id = "cfmemail" onclick = "SendMail()" {{cfmemail}}>发送验证码</a>
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">验证码</span>
+                    <div id = "ipt" style = "display: inline">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                        <input type = "text" style = "width: 35px; height: 25px; text-align: center;">
+                    </div>
+                    <span id = "time">倒计时</span>
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">密码</span>
+                    <input type = "password" name = "pwd" style = "text-align: left;">
+                </div>
+                <div class = "registergroup">
+                    <span style = "font-size: 16px">确认密码</span>
+                    <input type = "password" name = "cfmpwd" style = "text-align: left;">
+                </div>
+                <input type = "submit" name = "submit" value = "注册" style = "margin-top: 20px;" class = "btn btn-success">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class = "val-box" id = "val-box">
+    <input id = "val-code-input" type = "text" maxlength = "6" onkeyup = "checkForNum(this)" onselectstart = "return false;" onblur = "checkForNum(this)" />
+        <div name = "val-item"></div>
+        <div name = "val-item"></div>
+        <div name = "val-item"></div>
+        <div name = "val-item"></div>
+    </div>
+
+    <script type = "text/javascript">
+        $(() => {
+            var valCodeInput = $('#val-code-input');
+            var valCodeItems = $("div[name='val-item']");
+            var regex = /^[\d]+$/;
+            var valCodeLength = 0;
+            $('#val-box').on('click',()=> {
+                valCodeInput.focus();
+            })
+            valCodeInput.on('input propertychange change', (e) => {
+                valCodeLength = valCodeInput.val().length;
+                if (valCodeInput.val() && regex.test(valCodeInput.val())) {
+                    $(valCodeItems[valCodeLength - 1]).addClass('available');
+                    $(valCodeItems[valCodeLength - 1]).text(valCodeInput.val().substring(valCodeLength - 1, valCodeLength));
+                }
+            })
+
+            $(this).on('keyup', (e) => {
+                if (e.keyCode === 8) {
+                    $(valCodeItems[valCodeLength]).removeClass('available');
+                    $(valCodeItems[valCodeLength]).text("");
+                }
+            });
+        })
+
+        function checkForNum(obj) {
+            obj.value = obj.value.replace(/[\D]/g, '');
+        }
+    </script>
+
+<script>
+    //自动移动至下一位
+    $('#ipt input:gt(0)').attr('readOnly', 'true');
+    $('#ipt input').keyup(function() {
+        if (/^[a-zA-Z]{1}$/g.test($(this).val())) {
+            $(this).next().removeAttr('readOnly').focus();
+        } 
+        else {
+            $(this).val('');
+        }
+    });
+</script>

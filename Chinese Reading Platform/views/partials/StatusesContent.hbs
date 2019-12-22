@@ -1,0 +1,75 @@
+<div id = "mianban" class = "panel panel-default" style = "width: 80%; margin-left: 50px; margin-right: 50px">
+    {{!-- 实际内容页的改变 --}}
+    <script language = "javascript">
+        $(document).ready(function(){
+            $("#headerbar a").click(function() {
+                $this = $(this);
+                if ($this[0].innerHTML == "全站动态") {
+                    $("#headerbar li").removeClass("active");
+                    $this.parent().addClass("active");
+                    $this[0].attributes.href = '#';
+                    $("#StatusesCollection").hide();
+                    $("#Statuses").show();
+                }
+                else if ($this[0].innerHTML == "关注动态") {
+                    $("#headerbar li").removeClass("active");
+                    $this.parent().addClass("active");
+                    $this[0].attributes.href = '#';
+                    $("#StatusesCollection").show();
+                    $("#Statuses").hide();
+                }
+            });
+        });
+    </script>
+
+    <table width = "100%" class = "table" style = "border-collapse: separate; border-spacing: 0px 0px;">
+        <tr>
+            <ul class = "nav nav-tabs" id = "headerbar" >
+                <li class = "active"><a>关注动态</a></li>
+                <li><a>全站动态</a></li>
+            </ul>
+        </tr>
+    </table>
+
+    {{!-- 关注动态 --}}
+    <table style = "width: 100%" id = "StatusesCollection">
+        <tr>
+            <td style = "text-align: left; margin: 0px">发表人名字
+                <small>
+                    更新时间
+                </small>
+                <p style = "font-size: 12px; text-align: left; margin: 0px">
+                    主题帖内容
+                </p>
+            </td>
+            <td>
+                <p style = "text-align: right; margin: 0px">
+                    <i class = "iconfont icon-praise_icon" style = "font-size:14px;">点赞数</i>
+                    <i style = "font-size: 14px;" class = "iconfont icon-pinglun">评论数</i>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table style = "width: 100%;" hidden id = "Statuses" >
+        <tr>
+            <td style = "text-align: left; margin: 0px">发表人名字
+                <small>
+                    更新时间
+                </small>
+                <p style = "font-size: 12px; text-align: left; margin: 0px">
+                    主题帖内容
+                </p>
+            </td>
+            <td>
+                <p style = "text-align: right; margin: 0px">
+                    <i class = "iconfont icon-praise_icon" style = "font-size: 14px;">点赞数</i>
+                    <i style = "font-size: 14px;" class = "iconfont icon-pinglun">评论数</i>
+                </p>
+            </td>
+        </tr>
+    </table>
+       
+    {{>Pag}}
+
+</div>
